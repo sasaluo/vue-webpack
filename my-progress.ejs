@@ -1,0 +1,775 @@
+<@- include('include/_header.ejs', {data:{title:"我的进度",bodyClassName: "white-bg"}}); @>
+
+<section class="tab">
+    <ul class="nav-tabs black-tabs" role="tablist" id="js_isMortgage">
+        <li role="presentation" class="no-mortgage active">
+            <div  aria-controls="home" role="tab" data-toggle="tab">无抵押</div>
+        </li>
+        <li role="presentation" class="mortgage">
+            <div  aria-controls="profile" role="tab" data-toggle="tab">有抵押</div>
+        </li>
+        <li role="presentation" class="appointment">
+            <div  aria-controls="profile" role="tab" data-toggle="tab">O2O</div>
+        </li>
+        <li role="presentation" class="allLoan black-border dn">
+            <div  aria-controls="profile" role="tab" data-toggle="tab">万商贷</div>
+        </li>
+    </ul>
+</section>
+<div class="tab-content" style="">
+    <section role="tabpanel" id="no-mortgage" class="tab-pane tab-page active-page pro-query">
+        <div class="query-thead">
+            <table class="tac">
+                <tr>
+                    <th width="30%" class="screen-active th-left"><span class="select-btn">状态<span class="icon-spr icon-screen"></span></span></th>
+                    <th width="33%" >客户</th>
+                    <th width="34%" id="js_orderCode" data-sort="">申请日期<span class="icon icon-sort" style="display: none"></span></th>
+                </tr>
+            </table>
+        </div>
+        <div class="iscroll-wrapper">
+            <div class="scroller">
+                <div class="pull-down refresh">
+                    <span class="icon-pull-down icon-refresh"></span>
+                    <span class="pull-down-label status-bar"
+                          data-state-pull-start-text="释放刷新"
+                          data-state-pull-cancel-text="下拉刷新"
+                          data-pending-text="加载中"
+                          data-done-text="下拉刷新"
+                          data-success-text="加载完成"
+                          data-error-text="加载失败"
+                          data-retry-text="重试一次"
+                    >下拉刷新</span>
+                </div>
+
+                <div class="query-tbody">
+                    <table class="tac progress-table">
+                    </table>
+                </div>
+
+                <div class="pull-up refresh">
+                    <span class="icon-pull-up icon-refresh"></span>
+                    <span class="pull-up-label status-bar"
+                          data-state-pull-start-text="释放刷新"
+                          data-state-pull-cancel-text="上拉加载下一页"
+                          data-pending-text="加载中"
+                          data-done-text="上拉加载下一页"
+                          data-success-text="加载完成"
+                          data-error-text="加载失败"
+                          data-retry-text="重试一次"
+                    >上拉加载下一页</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section role="tabpanel" id="mortgage" class="tab-pane dn tab-page pro-query ">
+        <div class="query-thead">
+            <table class="tac">
+                <tr>
+                    <th width="28%" class="screen-active th-left"><span class="select-btn">状态<span class="icon-spr icon-screen"></span></span></th>
+                    <th width="33%" >客户</th>
+                    <th width="34%" id="js_noOrTime" class="toggle">申请日期<span class="icon icon-sort" ></span></th>
+                    <th width="34%" id="js_noOrTime2" class="toggle dn">业务员</th>
+                </tr>
+            </table>
+        </div>
+        <div class="iscroll-wrapper">
+            <div class="scroller">
+                <div class="pull-down refresh">
+                    <span class="icon-pull-down icon-refresh"></span>
+                    <span class="pull-down-label status-bar"
+                          data-state-pull-start-text="释放刷新"
+                          data-state-pull-cancel-text="下拉刷新"
+                          data-pending-text="加载中"
+                          data-done-text="下拉刷新"
+                          data-success-text="加载完成"
+                          data-error-text="加载失败"
+                          data-retry-text="重试一次"
+                    >下拉刷新</span>
+                </div>
+
+                <div class="query-tbody">
+                    <table class="tac progress-table">
+                    </table>
+                </div>
+
+                <div class="pull-up refresh">
+                    <span class="icon-pull-up icon-refresh"></span>
+                    <span class="pull-up-label status-bar"
+                          data-state-pull-start-text="释放刷新"
+                          data-state-pull-cancel-text="上拉加载下一页"
+                          data-pending-text="加载中"
+                          data-done-text="上拉加载下一页"
+                          data-success-text="加载完成"
+                          data-error-text="加载失败"
+                          data-retry-text="重试一次"
+                    >上拉加载下一页</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section role="tabpanel" id="appointment" class="tab-pane dn tab-page pro-query ">
+        <div class="query-thead">
+            <table class="tac">
+                <tr id="js-otherRegister">
+                    <th width="26%" class="screen-active th-left"><span class="select-btn">状态<span class="icon-spr icon-screen"></span></span></th>
+                    <th width="22%">客户</th>
+                    <th width="32%" class="toggle js-appointmentSort">申请日期<span class="icon icon-sort" ></span></th>
+                    <th width="20%">类型</th>
+                </tr>
+                <tr id="js-refereeRegister" style="display: none">
+                    <th width="30%" class="screen-active th-left"><span class="select-btn">状态<span class="icon-spr icon-screen"></span></span></th>
+                    <th width="33%" >客户</th>
+                    <th width="34%" class="toggle js-appointmentSort">申请日期<span class="icon icon-sort"></span></th>
+                </tr>
+            </table>
+        </div>
+        <div class="iscroll-wrapper">
+            <div class="scroller">
+                <div class="pull-down refresh">
+                    <span class="icon-pull-down icon-refresh"></span>
+                    <span class="pull-down-label status-bar"
+                          data-state-pull-start-text="释放刷新"
+                          data-state-pull-cancel-text="下拉刷新"
+                          data-pending-text="加载中"
+                          data-done-text="下拉刷新"
+                          data-success-text="加载完成"
+                          data-error-text="加载失败"
+                          data-retry-text="重试一次"
+                    >下拉刷新</span>
+                </div>
+
+                <div class="query-tbody">
+                    <table class="tac progress-table">
+
+
+                    </table>
+                </div>
+
+                <div class="pull-up refresh">
+                    <span class="icon-pull-up icon-refresh"></span>
+                    <span class="pull-up-label status-bar"
+                          data-state-pull-start-text="释放刷新"
+                          data-state-pull-cancel-text="上拉加载下一页"
+                          data-pending-text="加载中"
+                          data-done-text="上拉加载下一页"
+                          data-success-text="加载完成"
+                          data-error-text="加载失败"
+                          data-retry-text="重试一次"
+                    >上拉加载下一页</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section role="tabpanel" id="allLoan" class="tab-pane dn tab-page pro-query ">
+        <div class="query-thead">
+            <table class="tac">
+                <tr id="js-partnersLeader">
+                    <th width="24%" class="screen-active th-left"><span class="select-btn">状态<span class="icon-spr icon-screen"></span></span></th>
+                    <th width="24%">产品</th>
+                    <th width="24%" class="toggle js-appointmentSort">客户</th>
+                    <th width="28%">业务员</th>
+                </tr>
+                <tr id="js-partnersSeller" style="display: none">
+                    <th width="24%" class="screen-active th-left"><span class="select-btn">状态<span class="icon-spr icon-screen"></span></span></th>
+                    <th width="24%">产品</th>
+                    <th width="24%" class="toggle js-appointmentSort">客户</th>
+                    <th width="28%" id="js_noOrTime" class="toggle">申请日期<span class="icon icon-sort"></span></th>
+                </tr>
+            </table>
+        </div>
+        <div class="iscroll-wrapper">
+            <div class="scroller">
+                <div class="pull-down refresh">
+                    <span class="icon-pull-down icon-refresh"></span>
+                    <span class="pull-down-label status-bar"
+                          data-state-pull-start-text="释放刷新"
+                          data-state-pull-cancel-text="下拉刷新"
+                          data-pending-text="加载中"
+                          data-done-text="下拉刷新"
+                          data-success-text="加载完成"
+                          data-error-text="加载失败"
+                          data-retry-text="重试一次"
+                    >下拉刷新</span>
+                </div>
+
+                <div class="query-tbody">
+                    <table class="tac progress-table">
+
+
+                    </table>
+                </div>
+
+                <div class="pull-up refresh">
+                    <span class="icon-pull-up icon-refresh"></span>
+                    <span class="pull-up-label status-bar"
+                          data-state-pull-start-text="释放刷新"
+                          data-state-pull-cancel-text="上拉加载下一页"
+                          data-pending-text="加载中"
+                          data-done-text="上拉加载下一页"
+                          data-success-text="加载完成"
+                          data-error-text="加载失败"
+                          data-retry-text="重试一次"
+                    >上拉加载下一页</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div class="leayer dn no-mortgage-filter">
+    <div class="screen" style="margin-top: 52px">
+        <ul class="list-screen" id="js_screen">
+
+        </ul>
+        <div class="btn-flex">
+            <div class="tal screen-cancel">取消</div>
+            <div class="tar red screen-ok">确定</div>
+        </div>
+    </div>
+</div>
+
+<div class="leayer dn mortgage-filter">
+    <div class="screen" style="margin-top: 52px">
+        <ul class="list-screen" id="js_mor_screen">
+
+        </ul>
+        <div class="btn-flex">
+            <div class="tal screen-cancel">取消</div>
+            <div class="tar red screen-ok">确定</div>
+        </div>
+    </div>
+</div>
+
+<div class="leayer dn appointment-filter">
+    <div class="screen f30" style="margin-top: 52px">
+        <ul class="list-screen" id="js_appointment_screen">
+
+        </ul>
+        <div class="btn-flex">
+            <div class="tal screen-cancel">取消</div>
+            <div class="tar red screen-ok">确定</div>
+        </div>
+    </div>
+</div>
+<div class="leayer dn allLoan-filter">
+    <div class="screen f30" style="margin-top: 52px">
+        <ul class="list-screen" id="js_allLoan_screen">
+
+        </ul>
+        <div class="btn-flex">
+            <div class="tal screen-cancel">取消</div>
+            <div class="tar red screen-ok">确定</div>
+        </div>
+    </div>
+</div>
+
+<script type="text/templates" id="noprogress-tpl">
+    <div class="no-draft">
+        <div class="icon-no icon-noodr"></div>
+        <p class="message"></p>
+    </div>
+</script>
+<script id="list-screen" type="text/x-handlebars-template">
+    <li class="active" prostatus="all">全部<span class="icon-spr icon-active"></span></li>
+    <%for(var i = 0;i < statusList.length;i++){%>
+    <li prostatus="<%=statusList[i].code%>"><%=statusList[i].name%><span class="icon-spr icon-active"></span></li>
+    <%}%>
+</script>
+<script type="text/templates" id="item-tpl">
+    <%for(var i = 0 ; i < list.length ; i++){
+        if(list[i].applDate){
+            list[i].applDate = list[i].applDate.slice(0,10).replace(/-/g,'.');
+        }
+    %>
+    <tr applNo="<%=list[i].applNo%>" data-status-code="<%=list[i].statusDes%>" data-status-des="<%=list[i].statusDes%>" data-referrer-name ="<%=list[i].referrerName%>" data-referrer-level="<%=list[i].referrerLevel%>" statusCode="<%=list[i].statusDes%>">
+        <td width="28%" class="tal"><span class="<%=list[i].cssClass%>"><%=list[i].statusDes&&(list[i].statusDes.length>5? list[i].statusDes.replace(list[i].statusDes.substring(2,list[i].statusDes.length-2),'…'):list[i].statusDes)%></span></td>
+        <td width="36%" class=""><%=list[i].custName%></td>
+        <td width="45%"><%=list[i].applDate%></td>
+    </tr>
+    <%}%>
+</script>
+<script type="text/templates" id="time-item-tpl">
+    <%for(var i = 0 ; i < list.length ; i++){
+        list[i].applyTime = (list[i].applyTime || "").replace(/\//g,'.');
+    %>
+    <tr applNo="<%=list[i].applyNo%>" applyTime="<%=list[i].applyTime%>" data-status-code="<%=list[i].followCode%>" data-referrer-name ="<%=list[i].referrerName%>" data-referrer-level="<%=list[i].referrerLevel%>" >
+        <td width="30%" class="tal"><span class="<%=list[i].cssClass%>"><%=list[i].statusDes&&(list[i].statusDes.length>5? list[i].statusDes.replace(list[i].statusDes.substring(2,list[i].statusDes.length-2),'…'):list[i].statusDes)%></span></td>
+        <td width="33%" class=""><%=list[i].custName%></td>
+        <td width="45%"><%=list[i].isCHUserName?list[i].salesmanName:list[i].applyTime%></td>
+
+    </tr>
+    <%}%>
+</script>
+<script type="text/template" id="appoint-item-tpl">
+
+    <%
+        if(!list.isReferee){
+            var listO2O = list.meQueryList || list.meRefereeQueryList || [];
+            var listIPOS = list.QueryAppointListMap || [];
+            for(var i = 0;i<listIPOS.length;i++){
+                listIPOS[i].appointStatus = (listIPOS[i].appointStatus=='Y'||listIPOS[i].appointStatus=='预约成功')?'预约成功':'预约失败';
+                listIPOS[i].loanCode = (listIPOS[i].loanCode == 'PH1000100090001'|| listIPOS[i].loanCode == '经营类')?'经营类':'个人';
+                listIPOS[i].appointDate = listIPOS[i].appointDate.replace(/-/g,'.');
+    %>
+            <tr applNo="<%=listIPOS[i].appointNo%>">
+                <td width="24%"  class="tal"><span class="c-order"><%=listIPOS[i].appointStatus&&(listIPOS[i].appointStatus.length>5? listIPOS[i].appointStatus.replace(listIPOS[i].appointStatus.substring(2,listIPOS[i].appointStatus.length-2),'…'):listIPOS[i].appointStatus)%></span></td>
+                <td width="22%"><%=listIPOS[i].name%></td>
+                <td width="32%"><%=listIPOS[i].appointDate%></td>
+                <td width="20%"><%=listIPOS[i].loanCode%></td>
+            </tr>
+    <%}%>
+    <%
+            for(var i = 0;i<listO2O.length;i++){
+    %>
+            <tr applNo="<%=listO2O[i].applyNo%>" statusCode="<%=listO2O[i].appointStatus%>" loanCode="<%=listO2O[i].mainLoanCode%>">
+                <td width="24%"  class="tal"><span class="<%=listO2O[i].cssClass%>"><%=listO2O[i].appointStatus&&(listO2O[i].appointStatus.length>5? listO2O[i].appointStatus.replace(listO2O[i].appointStatus.substring(2,listO2O[i].appointStatus.length-2),'…'):listO2O[i].appointStatus)%></span></td>
+                <td width="22%"><%=listO2O[i].custName%></td>
+                <td width="32%"><%=listO2O[i].applyDate%></td>
+                <td width="20%">个人</td>
+            </tr>
+
+
+     <%}
+     } else{
+         var listO2O = list.meRefereeQueryList || [];
+         for(var i=0;i<listO2O.length;i++){
+         %>
+        <tr applNo="<%=listO2O[i].applyNo%>" statusCode="<%=listO2O[i].appointStatus%>" loanCode="<%=listO2O[i].mainLoanCode%>">
+            <td width="28%"  class="tal"><span class="<%=listO2O[i].cssClass%>"><%=listO2O[i].appointStatus&&(listO2O[i].appointStatus.length>5? listO2O[i].appointStatus.replace(listO2O[i].appointStatus.substring(2,listO2O[i].appointStatus.length-2),'…'):listO2O[i].appointStatus)%></span></td>
+            <td width="36%"><%=listO2O[i].custNameCover%></td>
+            <td width="45%"><%=listO2O[i].applyDate%></td>
+        </tr>
+    <%}
+    }%>
+</script>
+<script type="text/template" id="allLoan-tpl">
+
+    <%
+      var listWSD = list.thirdQueryList || [];
+        if(!list.partnerLeader){
+        for(var i=0;i<listWSD.length;i++){
+          // if(listWSD[i].phaseCode=='0001' && listWSD[i].phaseStatus=='PS'){
+          //   listWSD[i].appointStatus = '预约成功'
+          // }
+    %>
+      <tr applNo="<%=listWSD[i].applyNo%>" statusCode="<%=listWSD[i].appointStatus%>" 
+          loanCode = "<%=listWSD[i].loanCode%>" phaseCode = "<%=listWSD[i].phaseCode%>" 
+          mainLoanCode = "<%=listWSD[i].mainLoanCode%>" loanCustId = "<%=listWSD[i].loanCustId%>">
+          <td width="24%"><span class="<%=listWSD[i].cssClass%>"><%=listWSD[i].appointStatus&&(listWSD[i].appointStatus.length>5? listWSD[i].appointStatus.replace(listWSD[i].appointStatus.substring(2,listWSD[i].appointStatus.length-2),'…'):listWSD[i].appointStatus)
+          %></span></td>
+          <td width="24%" class=""><%=(listWSD[i].mainLoanCode == 'PH100010009') ? "IPOS" : 
+          "金税贷"%></td>
+          <td width="24%"><%=listWSD[i].custName%></td>
+          <td width="28%"><%=listWSD[i].applyDate%></td>
+      </tr>
+      <%}
+      }else{
+          
+        for(var i=0;i<listWSD.length;i++){
+            if(listWSD[i].phaseCode=='0001' && listWSD[i].phaseStatus=='PS'){
+            listWSD[i].appointStatus = '预约成功'
+          }
+        %>
+          <tr applNo="<%=listWSD[i].applyNo%>" statusCode="<%=listWSD[i].appointStatus %>"
+              loanCode = "<%=listWSD[i].loanCode%>" phaseCode = "<%=listWSD[i].phaseCode%>"
+              mainLoanCode = "<%=listWSD[i].mainLoanCode%>" loanCustId = "<%=listWSD[i].loanCustId%>">
+            <td width="24%"><span class="<%=listWSD[i].cssClass || "c-order"%>"><%=listWSD[i].appointStatus&&(listWSD[i].appointStatus.length>5? listWSD[i].appointStatus.replace(listWSD[i].appointStatus.substring(2,listWSD[i].appointStatus.length-2),'…'):listWSD[i].appointStatus)%></span></td>
+            <td width="24%" class=""><%=(listWSD[i].mainLoanCode == 'PH100010009') ? "IPOS" : 
+            "金税贷"%></td>
+            <td width="24%"><%=listWSD[i].custName%></td>
+            <td width="28%"><%='--'%></td>
+          </tr>
+        <%}
+      }%>
+  
+</script>
+
+<@- include('include/_footer.ejs',{data:{main:"js/progress/my_progress"}}); @><@- include('include/_header.ejs', {data:{title:"我的进度",bodyClassName: "white-bg"}}); @>
+
+<section class="tab">
+    <ul class="nav-tabs black-tabs" role="tablist" id="js_isMortgage">
+        <li role="presentation" class="no-mortgage active">
+            <div  aria-controls="home" role="tab" data-toggle="tab">无抵押</div>
+        </li>
+        <li role="presentation" class="mortgage">
+            <div  aria-controls="profile" role="tab" data-toggle="tab">有抵押</div>
+        </li>
+        <li role="presentation" class="appointment">
+            <div  aria-controls="profile" role="tab" data-toggle="tab">O2O</div>
+        </li>
+        <li role="presentation" class="allLoan black-border dn">
+            <div  aria-controls="profile" role="tab" data-toggle="tab">万商贷</div>
+        </li>
+    </ul>
+</section>
+<div class="tab-content" style="">
+    <section role="tabpanel" id="no-mortgage" class="tab-pane tab-page active-page pro-query">
+        <div class="query-thead">
+            <table class="tac">
+                <tr>
+                    <th width="30%" class="screen-active th-left"><span class="select-btn">状态<span class="icon-spr icon-screen"></span></span></th>
+                    <th width="33%" >客户</th>
+                    <th width="34%" id="js_orderCode" data-sort="">申请日期<span class="icon icon-sort" style="display: none"></span></th>
+                </tr>
+            </table>
+        </div>
+        <div class="iscroll-wrapper">
+            <div class="scroller">
+                <div class="pull-down refresh">
+                    <span class="icon-pull-down icon-refresh"></span>
+                    <span class="pull-down-label status-bar"
+                          data-state-pull-start-text="释放刷新"
+                          data-state-pull-cancel-text="下拉刷新"
+                          data-pending-text="加载中"
+                          data-done-text="下拉刷新"
+                          data-success-text="加载完成"
+                          data-error-text="加载失败"
+                          data-retry-text="重试一次"
+                    >下拉刷新</span>
+                </div>
+
+                <div class="query-tbody">
+                    <table class="tac progress-table">
+                    </table>
+                </div>
+
+                <div class="pull-up refresh">
+                    <span class="icon-pull-up icon-refresh"></span>
+                    <span class="pull-up-label status-bar"
+                          data-state-pull-start-text="释放刷新"
+                          data-state-pull-cancel-text="上拉加载下一页"
+                          data-pending-text="加载中"
+                          data-done-text="上拉加载下一页"
+                          data-success-text="加载完成"
+                          data-error-text="加载失败"
+                          data-retry-text="重试一次"
+                    >上拉加载下一页</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section role="tabpanel" id="mortgage" class="tab-pane dn tab-page pro-query ">
+        <div class="query-thead">
+            <table class="tac">
+                <tr>
+                    <th width="28%" class="screen-active th-left"><span class="select-btn">状态<span class="icon-spr icon-screen"></span></span></th>
+                    <th width="33%" >客户</th>
+                    <th width="34%" id="js_noOrTime" class="toggle">申请日期<span class="icon icon-sort" ></span></th>
+                    <th width="34%" id="js_noOrTime2" class="toggle dn">业务员</th>
+                </tr>
+            </table>
+        </div>
+        <div class="iscroll-wrapper">
+            <div class="scroller">
+                <div class="pull-down refresh">
+                    <span class="icon-pull-down icon-refresh"></span>
+                    <span class="pull-down-label status-bar"
+                          data-state-pull-start-text="释放刷新"
+                          data-state-pull-cancel-text="下拉刷新"
+                          data-pending-text="加载中"
+                          data-done-text="下拉刷新"
+                          data-success-text="加载完成"
+                          data-error-text="加载失败"
+                          data-retry-text="重试一次"
+                    >下拉刷新</span>
+                </div>
+
+                <div class="query-tbody">
+                    <table class="tac progress-table">
+                    </table>
+                </div>
+
+                <div class="pull-up refresh">
+                    <span class="icon-pull-up icon-refresh"></span>
+                    <span class="pull-up-label status-bar"
+                          data-state-pull-start-text="释放刷新"
+                          data-state-pull-cancel-text="上拉加载下一页"
+                          data-pending-text="加载中"
+                          data-done-text="上拉加载下一页"
+                          data-success-text="加载完成"
+                          data-error-text="加载失败"
+                          data-retry-text="重试一次"
+                    >上拉加载下一页</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section role="tabpanel" id="appointment" class="tab-pane dn tab-page pro-query ">
+        <div class="query-thead">
+            <table class="tac">
+                <tr id="js-otherRegister">
+                    <th width="26%" class="screen-active th-left"><span class="select-btn">状态<span class="icon-spr icon-screen"></span></span></th>
+                    <th width="22%">客户</th>
+                    <th width="32%" class="toggle js-appointmentSort">申请日期<span class="icon icon-sort" ></span></th>
+                    <th width="20%">类型</th>
+                </tr>
+                <tr id="js-refereeRegister" style="display: none">
+                    <th width="30%" class="screen-active th-left"><span class="select-btn">状态<span class="icon-spr icon-screen"></span></span></th>
+                    <th width="33%" >客户</th>
+                    <th width="34%" class="toggle js-appointmentSort">申请日期<span class="icon icon-sort"></span></th>
+                </tr>
+            </table>
+        </div>
+        <div class="iscroll-wrapper">
+            <div class="scroller">
+                <div class="pull-down refresh">
+                    <span class="icon-pull-down icon-refresh"></span>
+                    <span class="pull-down-label status-bar"
+                          data-state-pull-start-text="释放刷新"
+                          data-state-pull-cancel-text="下拉刷新"
+                          data-pending-text="加载中"
+                          data-done-text="下拉刷新"
+                          data-success-text="加载完成"
+                          data-error-text="加载失败"
+                          data-retry-text="重试一次"
+                    >下拉刷新</span>
+                </div>
+
+                <div class="query-tbody">
+                    <table class="tac progress-table">
+
+
+                    </table>
+                </div>
+
+                <div class="pull-up refresh">
+                    <span class="icon-pull-up icon-refresh"></span>
+                    <span class="pull-up-label status-bar"
+                          data-state-pull-start-text="释放刷新"
+                          data-state-pull-cancel-text="上拉加载下一页"
+                          data-pending-text="加载中"
+                          data-done-text="上拉加载下一页"
+                          data-success-text="加载完成"
+                          data-error-text="加载失败"
+                          data-retry-text="重试一次"
+                    >上拉加载下一页</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section role="tabpanel" id="allLoan" class="tab-pane dn tab-page pro-query ">
+        <div class="query-thead">
+            <table class="tac">
+                <tr id="js-partnersLeader">
+                    <th width="24%" class="screen-active th-left"><span class="select-btn">状态<span class="icon-spr icon-screen"></span></span></th>
+                    <th width="24%">产品</th>
+                    <th width="24%" class="toggle js-appointmentSort">客户</th>
+                    <th width="28%">业务员</th>
+                </tr>
+                <tr id="js-partnersSeller" style="display: none">
+                    <th width="24%" class="screen-active th-left"><span class="select-btn">状态<span class="icon-spr icon-screen"></span></span></th>
+                    <th width="24%">产品</th>
+                    <th width="24%" class="toggle js-appointmentSort">客户</th>
+                    <th width="28%" id="js_noOrTime" class="toggle">申请日期<span class="icon icon-sort"></span></th>
+                </tr>
+            </table>
+        </div>
+        <div class="iscroll-wrapper">
+            <div class="scroller">
+                <div class="pull-down refresh">
+                    <span class="icon-pull-down icon-refresh"></span>
+                    <span class="pull-down-label status-bar"
+                          data-state-pull-start-text="释放刷新"
+                          data-state-pull-cancel-text="下拉刷新"
+                          data-pending-text="加载中"
+                          data-done-text="下拉刷新"
+                          data-success-text="加载完成"
+                          data-error-text="加载失败"
+                          data-retry-text="重试一次"
+                    >下拉刷新</span>
+                </div>
+
+                <div class="query-tbody">
+                    <table class="tac progress-table">
+
+
+                    </table>
+                </div>
+
+                <div class="pull-up refresh">
+                    <span class="icon-pull-up icon-refresh"></span>
+                    <span class="pull-up-label status-bar"
+                          data-state-pull-start-text="释放刷新"
+                          data-state-pull-cancel-text="上拉加载下一页"
+                          data-pending-text="加载中"
+                          data-done-text="上拉加载下一页"
+                          data-success-text="加载完成"
+                          data-error-text="加载失败"
+                          data-retry-text="重试一次"
+                    >上拉加载下一页</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div class="leayer dn no-mortgage-filter">
+    <div class="screen" style="margin-top: 52px">
+        <ul class="list-screen" id="js_screen">
+
+        </ul>
+        <div class="btn-flex">
+            <div class="tal screen-cancel">取消</div>
+            <div class="tar red screen-ok">确定</div>
+        </div>
+    </div>
+</div>
+
+<div class="leayer dn mortgage-filter">
+    <div class="screen" style="margin-top: 52px">
+        <ul class="list-screen" id="js_mor_screen">
+
+        </ul>
+        <div class="btn-flex">
+            <div class="tal screen-cancel">取消</div>
+            <div class="tar red screen-ok">确定</div>
+        </div>
+    </div>
+</div>
+
+<div class="leayer dn appointment-filter">
+    <div class="screen f30" style="margin-top: 52px">
+        <ul class="list-screen" id="js_appointment_screen">
+
+        </ul>
+        <div class="btn-flex">
+            <div class="tal screen-cancel">取消</div>
+            <div class="tar red screen-ok">确定</div>
+        </div>
+    </div>
+</div>
+<div class="leayer dn allLoan-filter">
+    <div class="screen f30" style="margin-top: 52px">
+        <ul class="list-screen" id="js_allLoan_screen">
+
+        </ul>
+        <div class="btn-flex">
+            <div class="tal screen-cancel">取消</div>
+            <div class="tar red screen-ok">确定</div>
+        </div>
+    </div>
+</div>
+
+<script type="text/templates" id="noprogress-tpl">
+    <div class="no-draft">
+        <div class="icon-no icon-noodr"></div>
+        <p class="message"></p>
+    </div>
+</script>
+<script id="list-screen" type="text/x-handlebars-template">
+    <li class="active" prostatus="all">全部<span class="icon-spr icon-active"></span></li>
+    <%for(var i = 0;i < statusList.length;i++){%>
+    <li prostatus="<%=statusList[i].code%>"><%=statusList[i].name%><span class="icon-spr icon-active"></span></li>
+    <%}%>
+</script>
+<script type="text/templates" id="item-tpl">
+    <%for(var i = 0 ; i < list.length ; i++){
+        if(list[i].applDate){
+            list[i].applDate = list[i].applDate.slice(0,10).replace(/-/g,'.');
+        }
+    %>
+    <tr applNo="<%=list[i].applNo%>" data-status-code="<%=list[i].statusDes%>" data-status-des="<%=list[i].statusDes%>" data-referrer-name ="<%=list[i].referrerName%>" data-referrer-level="<%=list[i].referrerLevel%>" statusCode="<%=list[i].statusDes%>">
+        <td width="28%" class="tal"><span class="<%=list[i].cssClass%>"><%=list[i].statusDes&&(list[i].statusDes.length>5? list[i].statusDes.replace(list[i].statusDes.substring(2,list[i].statusDes.length-2),'…'):list[i].statusDes)%></span></td>
+        <td width="36%" class=""><%=list[i].custName%></td>
+        <td width="45%"><%=list[i].applDate%></td>
+    </tr>
+    <%}%>
+</script>
+<script type="text/templates" id="time-item-tpl">
+    <%for(var i = 0 ; i < list.length ; i++){
+        list[i].applyTime = (list[i].applyTime || "").replace(/\//g,'.');
+    %>
+    <tr applNo="<%=list[i].applyNo%>" applyTime="<%=list[i].applyTime%>" data-status-code="<%=list[i].followCode%>" data-referrer-name ="<%=list[i].referrerName%>" data-referrer-level="<%=list[i].referrerLevel%>" >
+        <td width="30%" class="tal"><span class="<%=list[i].cssClass%>"><%=list[i].statusDes&&(list[i].statusDes.length>5? list[i].statusDes.replace(list[i].statusDes.substring(2,list[i].statusDes.length-2),'…'):list[i].statusDes)%></span></td>
+        <td width="33%" class=""><%=list[i].custName%></td>
+        <td width="45%"><%=list[i].isCHUserName?list[i].salesmanName:list[i].applyTime%></td>
+
+    </tr>
+    <%}%>
+</script>
+<script type="text/template" id="appoint-item-tpl">
+
+    <%
+        if(!list.isReferee){
+            var listO2O = list.meQueryList || list.meRefereeQueryList || [];
+            var listIPOS = list.QueryAppointListMap || [];
+            for(var i = 0;i<listIPOS.length;i++){
+                listIPOS[i].appointStatus = (listIPOS[i].appointStatus=='Y'||listIPOS[i].appointStatus=='预约成功')?'预约成功':'预约失败';
+                listIPOS[i].loanCode = (listIPOS[i].loanCode == 'PH1000100090001'|| listIPOS[i].loanCode == '经营类')?'经营类':'个人';
+                listIPOS[i].appointDate = listIPOS[i].appointDate.replace(/-/g,'.');
+    %>
+            <tr applNo="<%=listIPOS[i].appointNo%>">
+                <td width="24%"  class="tal"><span class="c-order"><%=listIPOS[i].appointStatus&&(listIPOS[i].appointStatus.length>5? listIPOS[i].appointStatus.replace(listIPOS[i].appointStatus.substring(2,listIPOS[i].appointStatus.length-2),'…'):listIPOS[i].appointStatus)%></span></td>
+                <td width="22%"><%=listIPOS[i].name%></td>
+                <td width="32%"><%=listIPOS[i].appointDate%></td>
+                <td width="20%"><%=listIPOS[i].loanCode%></td>
+            </tr>
+    <%}%>
+    <%
+            for(var i = 0;i<listO2O.length;i++){
+    %>
+            <tr applNo="<%=listO2O[i].applyNo%>" statusCode="<%=listO2O[i].appointStatus%>" loanCode="<%=listO2O[i].mainLoanCode%>">
+                <td width="24%"  class="tal"><span class="<%=listO2O[i].cssClass%>"><%=listO2O[i].appointStatus&&(listO2O[i].appointStatus.length>5? listO2O[i].appointStatus.replace(listO2O[i].appointStatus.substring(2,listO2O[i].appointStatus.length-2),'…'):listO2O[i].appointStatus)%></span></td>
+                <td width="22%"><%=listO2O[i].custName%></td>
+                <td width="32%"><%=listO2O[i].applyDate%></td>
+                <td width="20%">个人</td>
+            </tr>
+
+
+     <%}
+     } else{
+         var listO2O = list.meRefereeQueryList || [];
+         for(var i=0;i<listO2O.length;i++){
+         %>
+        <tr applNo="<%=listO2O[i].applyNo%>" statusCode="<%=listO2O[i].appointStatus%>" loanCode="<%=listO2O[i].mainLoanCode%>">
+            <td width="28%"  class="tal"><span class="<%=listO2O[i].cssClass%>"><%=listO2O[i].appointStatus&&(listO2O[i].appointStatus.length>5? listO2O[i].appointStatus.replace(listO2O[i].appointStatus.substring(2,listO2O[i].appointStatus.length-2),'…'):listO2O[i].appointStatus)%></span></td>
+            <td width="36%"><%=listO2O[i].custNameCover%></td>
+            <td width="45%"><%=listO2O[i].applyDate%></td>
+        </tr>
+    <%}
+    }%>
+</script>
+<script type="text/template" id="allLoan-tpl">
+
+    <%
+      var listWSD = list.thirdQueryList || [];
+        if(!list.partnerLeader){
+        for(var i=0;i<listWSD.length;i++){
+          // if(listWSD[i].phaseCode=='0001' && listWSD[i].phaseStatus=='PS'){
+          //   listWSD[i].appointStatus = '预约成功'
+          // }
+    %>
+      <tr applNo="<%=listWSD[i].applyNo%>" statusCode="<%=listWSD[i].appointStatus%>" 
+          loanCode = "<%=listWSD[i].loanCode%>" phaseCode = "<%=listWSD[i].phaseCode%>" 
+          mainLoanCode = "<%=listWSD[i].mainLoanCode%>" loanCustId = "<%=listWSD[i].loanCustId%>">
+          <td width="24%"><span class="<%=listWSD[i].cssClass%>"><%=listWSD[i].appointStatus&&(listWSD[i].appointStatus.length>5? listWSD[i].appointStatus.replace(listWSD[i].appointStatus.substring(2,listWSD[i].appointStatus.length-2),'…'):listWSD[i].appointStatus)
+          %></span></td>
+          <td width="24%" class=""><%=(listWSD[i].mainLoanCode == 'PH100010009') ? "IPOS" : 
+          "金税贷"%></td>
+          <td width="24%"><%=listWSD[i].custName%></td>
+          <td width="28%"><%=listWSD[i].applyDate%></td>
+      </tr>
+      <%}
+      }else{
+          
+        for(var i=0;i<listWSD.length;i++){
+            if(listWSD[i].phaseCode=='0001' && listWSD[i].phaseStatus=='PS'){
+            listWSD[i].appointStatus = '预约成功'
+          }
+        %>
+          <tr applNo="<%=listWSD[i].applyNo%>" statusCode="<%=listWSD[i].appointStatus %>"
+              loanCode = "<%=listWSD[i].loanCode%>" phaseCode = "<%=listWSD[i].phaseCode%>"
+              mainLoanCode = "<%=listWSD[i].mainLoanCode%>" loanCustId = "<%=listWSD[i].loanCustId%>">
+            <td width="24%"><span class="<%=listWSD[i].cssClass || "c-order"%>"><%=listWSD[i].appointStatus&&(listWSD[i].appointStatus.length>5? listWSD[i].appointStatus.replace(listWSD[i].appointStatus.substring(2,listWSD[i].appointStatus.length-2),'…'):listWSD[i].appointStatus)%></span></td>
+            <td width="24%" class=""><%=(listWSD[i].mainLoanCode == 'PH100010009') ? "IPOS" : 
+            "金税贷"%></td>
+            <td width="24%"><%=listWSD[i].custName%></td>
+            <td width="28%"><%='--'%></td>
+          </tr>
+        <%}
+      }%>
+  
+</script>
+
+<@- include('include/_footer.ejs',{data:{main:"js/progress/my_progress"}}); @>
